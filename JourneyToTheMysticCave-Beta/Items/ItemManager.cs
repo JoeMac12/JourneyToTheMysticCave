@@ -37,9 +37,9 @@ namespace JourneyToTheMysticCave_Beta
             this.map = map;
             this.enemyManager = enemyManager;
 
-            DistributeItems(1, 2, 1, 0, 0);
-            DistributeItems(2, 2, 1, 5, 1);
-            DistributeItems(3, 2, 1, 25, 2);
+            DistributeItems(1, 2, 1, 0, 5, 0);
+            DistributeItems(2, 2, 1, 5, 5, 1);
+            DistributeItems(3, 2, 1, 25, 5, 2);
         }
 
         public void Update()
@@ -85,7 +85,7 @@ namespace JourneyToTheMysticCave_Beta
             return items.Where(item => item is Money).All(money => money.collected);
         }
 
-        private void DistributeItems(int potionCount, int moneyCount, int swordCount, int trapCount, int level)
+        private void DistributeItems(int potionCount, int moneyCount, int swordCount, int trapCount, int goldCount, int level)
         {
             int index = items.Count;
 
@@ -119,6 +119,15 @@ namespace JourneyToTheMysticCave_Beta
                 var trap = new Trap(stats.TrapCount, stats.TrapCharacter, stats.TrapName, stats.TrapDamage, legendColors, player, enemyManager, levelManager);
                 trap.pos = stats.PlaceCharacters(level, random);
                 items.Add(trap);
+            }
+
+            // Distribute Gold
+            for (int i = 0; i < goldCount; i++)
+            {
+                int goldValue = random.Next(stats.MinGoldValue, stats.MaxGoldValue + 1);
+                var gold = new Gold(stats.GoldCount, stats.GoldCharacter, stats.GoldName, legendColors, player, goldValue);
+                gold.pos = stats.PlaceCharacters(level, random);
+                items.Add(gold);
             }
 
             if (level == 0)

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gold.cs" />
     <Compile Include="Enemy\Boss.cs" />
     <Compile Include="Enemy\Enemy.cs" />
     <Compile Include="Enemy\EnemyManager.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="HUD.cs" />
     <Compile Include="Items\Item.cs" />
     <Compile Include="Items\ItemManager.cs" />
+    <Compile Include="Items\ShopManager.cs" />
     <Compile Include="Items\Sword.cs" />
     <Compile Include="Level\LegendColors.cs" />
     <Compile Include="Level\LevelManager.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="Enemy\Ranger.cs" />
     <Compile Include="Items\Trap.cs" />
     <Compile Include="GameStats.cs" />
+    <Compile Include="Shop.cs" />
     <Compile Include="_GameManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -19,6 +19,8 @@ namespace JourneyToTheMysticCave_Beta
         public bool itemPickedUp = false;
         private Enemy lastEncountered;
 
+        public int Gold { get; private set; }
+
         public Enemy GetLastEnountered()
         {
             return lastEncountered;
@@ -115,6 +117,7 @@ namespace JourneyToTheMysticCave_Beta
                 case ConsoleKey.C: dirY = 1; dirX = 1; break;
                 case ConsoleKey.Spacebar: return; // using for testing, player doesn't move
                 case ConsoleKey.Escape: System.Environment.Exit(0); return;
+                case ConsoleKey.R:TryEnterShop(); break;
             }
         }
 
@@ -167,6 +170,39 @@ namespace JourneyToTheMysticCave_Beta
                 inDeep = false;
             }
             moveCount++;
+        }
+
+        public void AddGold(int amount)
+        {
+            Gold += amount;
+        }
+
+        public bool SpendGold(int amount)
+        {
+            if (Gold >= amount)
+            {
+                Gold -= amount;
+                return true;
+            }
+            return false;
+        }
+
+        private void TryEnterShop()
+        {
+            Shop nearbyShop = GetNearbyShop();
+            if (nearbyShop != null)
+            {
+                OpenShopWindow(nearbyShop);
+            }
+        }
+
+        private Shop GetNearbyShop()
+        {
+            return null;
+        }
+
+        private void OpenShopWindow(Shop shop)
+        {
         }
     }
 }

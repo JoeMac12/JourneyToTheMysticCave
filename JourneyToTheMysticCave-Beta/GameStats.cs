@@ -89,6 +89,14 @@ namespace JourneyToTheMysticCave_Beta
         public int SwordMultiplier { get; set; }
         #endregion
 
+        #region GoldStat Declarations
+        public int GoldCount { get; set; }
+        public char GoldCharacter { get; set; }
+        public string GoldName { get; set; }
+        public int MinGoldValue { get; set; }
+        public int MaxGoldValue { get; set; }
+        #endregion
+
         public int PoisonDamage;
 
         public void Init(LevelManager levelManager, Map map)
@@ -169,6 +177,12 @@ namespace JourneyToTheMysticCave_Beta
 
             // Floor Damage
             PoisonDamage = 5;
+
+            GoldCount = 10;
+            GoldCharacter = 'G';
+            GoldName = "Gold";
+            MinGoldValue = 1;
+            MaxGoldValue = 10;
         }
 
         public int GiveHealth(Random random, string type)

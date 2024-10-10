@@ -19,6 +19,7 @@ namespace JourneyToTheMysticCave_Beta
         HUD hUD = new HUD();
         EnemyManager enemyManager = new EnemyManager();
         ItemManager itemManager = new ItemManager();
+        ShopManager shopManager = new ShopManager();
 
         bool gameOver = false;
         bool playerWon = false;
@@ -58,6 +59,7 @@ namespace JourneyToTheMysticCave_Beta
             itemManager.Init(gameStats, levelManager, legendColors, gamelog, player, map, enemyManager);
             gamelog.Init(player, enemyManager, itemManager, gameStats, map);
             hUD.Init(player, enemyManager, itemManager, map, legendColors);
+            shopManager.InitializeShops();
         }
 
         private void Update()
@@ -70,6 +72,7 @@ namespace JourneyToTheMysticCave_Beta
             itemManager.Update();
             hUD.Update();
             gamelog.Update();
+            shopManager.Update();
         }
 
         private void Draw()
@@ -81,6 +84,7 @@ namespace JourneyToTheMysticCave_Beta
             enemyManager.Draw();
             hUD.Draw();
             gamelog.Draw();
+            shopManager.Draw();
         }
 
         void TutorialText()
