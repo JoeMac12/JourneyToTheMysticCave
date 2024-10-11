@@ -178,11 +178,12 @@ namespace JourneyToTheMysticCave_Beta
             // Floor Damage
             PoisonDamage = 5;
 
+            // Gold Configs
             GoldCount = 10;
             GoldCharacter = 'G';
             GoldName = "Gold";
-            MinGoldValue = 1;
-            MaxGoldValue = 10;
+            MinGoldValue = 6;
+            MaxGoldValue = 12;
         }
 
         public int GiveHealth(Random random, string type)
