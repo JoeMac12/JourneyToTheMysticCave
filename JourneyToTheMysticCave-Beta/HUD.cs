@@ -51,6 +51,7 @@ namespace JourneyToTheMysticCave_Beta
             Console.WriteLine("+-------------------------------+");
             Console.WriteLine($"{player.name} Health: {player.healthSystem.health}");
             Console.WriteLine($"{player.name} Damage: {player.damage}");
+            Console.WriteLine($"{player.name} Gold: {player.Gold}");
             Console.WriteLine($"Last Enemy Attacked - {EnemyName()}");
             if (EnemyHealth() == 0)
                 health = $"{EnemyName()} is dead";

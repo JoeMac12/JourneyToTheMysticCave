@@ -18,6 +18,7 @@ namespace JourneyToTheMysticCave_Beta
         public bool attackedEnemy = false;
         public bool itemPickedUp = false;
         private Enemy lastEncountered;
+        private ShopManager shopManager;
 
         public int Gold { get; private set; }
 
@@ -39,7 +40,7 @@ namespace JourneyToTheMysticCave_Beta
             healthSystem = new HealthSystem();
         }
 
-        public void Init(Map map, GameStats gameStats, LegendColors legendColors, EnemyManager enemyManager, LevelManager levelManager, ItemManager itemManager)
+        public void Init(Map map, GameStats gameStats, LegendColors legendColors, EnemyManager enemyManager, LevelManager levelManager, ItemManager itemManager, ShopManager shopManager)
         {
             this.map = map;
             this.gameStats = gameStats;
@@ -47,6 +48,7 @@ namespace JourneyToTheMysticCave_Beta
             this.enemyManager = enemyManager;
             this.levelManager = levelManager;
             this.itemManager = itemManager;
+            this.shopManager = shopManager;
 
             healthSystem.health = gameStats.PlayerHealth;
             character = gameStats.PlayerCharacter;
@@ -172,11 +174,13 @@ namespace JourneyToTheMysticCave_Beta
             moveCount++;
         }
 
+        // Collect gold
         public void AddGold(int amount)
         {
             Gold += amount;
         }
 
+        // Use gold
         public bool SpendGold(int amount)
         {
             if (Gold >= amount)
@@ -187,6 +191,7 @@ namespace JourneyToTheMysticCave_Beta
             return false;
         }
 
+        // Enter the shop if near it
         private void TryEnterShop()
         {
             Shop nearbyShop = GetNearbyShop();
@@ -196,13 +201,66 @@ namespace JourneyToTheMysticCave_Beta
             }
         }
 
+        // Check when the player is near a shop
         private Shop GetNearbyShop()
         {
+            foreach (Shop shop in shopManager.Shops)
+            {
+                int distance = Math.Abs(pos.x - shop.pos.x) + Math.Abs(pos.y - shop.pos.y);
+                if (distance <= 1)
+                {
+                    return shop;
+                }
+            }
             return null;
         }
 
+        // Opens the shop in a different window
         private void OpenShopWindow(Shop shop)
         {
+            bool shopping = true;
+            while (shopping)
+            {
+                Console.Clear();
+                Console.WriteLine($"Welcome to {shop.name}!");
+                Console.WriteLine($"Your Gold: {Gold}");
+                Console.WriteLine("\nAvailable Items:");
+                for (int i = 0; i < shop.Items.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {shop.Items[i].Name} - {shop.Items[i].Price} gold");
+                }
+                Console.WriteLine("\nPress the number of the item to buy it. Press 'Q' to exit the shop.");
+
+                ConsoleKeyInfo input = Console.ReadKey(true);
+                if (input.Key == ConsoleKey.Q) // Exit shop
+                {
+                    shopping = false;
+                }
+                else if (char.IsDigit(input.KeyChar))
+                {
+                    int selection = int.Parse(input.KeyChar.ToString()) - 1;
+                    if (selection >= 0 && selection < shop.Items.Count)
+                    {
+                        BuyItem(shop.Items[selection]);
+                    }
+                }
+            }
+            Console.Clear();
+        }
+
+        // Buy shop item
+        private void BuyItem(ShopItem item)
+        {
+            if (SpendGold(item.Price))
+            {
+                Console.WriteLine($"\nYou bought {item.Name}!");
+            }
+            else
+            {
+                Console.WriteLine("\nNot enough gold!");
+            }
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
         }
     }
 }
