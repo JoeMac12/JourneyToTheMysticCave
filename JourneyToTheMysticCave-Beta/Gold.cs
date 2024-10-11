@@ -22,6 +22,7 @@ namespace JourneyToTheMysticCave_Beta
             {
                 TryCollect();
                 player.AddGold(Value);
+                pickedUp = true;
             }
         }
     }

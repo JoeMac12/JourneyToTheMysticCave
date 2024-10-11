@@ -59,6 +59,14 @@ namespace JourneyToTheMysticCave_Beta
                 for (int i = itemsLevel1; i < items.Count; i++)
                     items[i].Update();
             }
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i] is Gold goldItem)
+                {
+                    goldItem.Update();
+                }
+            }
         }
 
         public void Draw()

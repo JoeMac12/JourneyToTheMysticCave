@@ -45,6 +45,7 @@ namespace JourneyToTheMysticCave_Beta
             columnCount = 0;
             Console.SetCursorPosition(columnCount, rowCount);
             Console.Write("Game Log:\n");
+            LogGoldCollection();
             LogAttack();
             LogFloorDamage();
             LogTrap();
@@ -152,6 +153,20 @@ namespace JourneyToTheMysticCave_Beta
                     Console.Write($"{enemyManager.enemies[i].name} has died \n");
                     enemyManager.enemies[i].healthSystem.dead = false;
                     enemyManager.enemies[i].processed = true;
+                }
+            }
+        }
+        #endregion
+
+        #region Gold
+        private void LogGoldCollection()
+        {
+            for (int i = 0; i < itemManager.items.Count; i++)
+            {
+                if (itemManager.items[i] is Gold goldItem && goldItem.pickedUp)
+                {
+                    Console.Write($"{player.name} has collected {goldItem.Value} gold!\n");
+                    goldItem.pickedUp = false;
                 }
             }
         }
