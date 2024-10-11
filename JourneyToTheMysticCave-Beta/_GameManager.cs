@@ -109,6 +109,9 @@ namespace JourneyToTheMysticCave_Beta
             DisplaySymbolsInColumns("Down-Right", "C");
             Console.WriteLine();
             Console.WriteLine();
+            DisplaySymbolsInColumns("Open Shop", "R");
+            Console.WriteLine();
+            Console.WriteLine();
 
             Console.WriteLine("Press any key to continue");
             Console.ReadKey(true);

@@ -44,12 +44,27 @@ namespace JourneyToTheMysticCave_Beta
 
                 if (IsValidShopPosition(x, y, currentMap))
                 {
-                    Shop shop = new Shop(gameStats.ShopCharacter, $"Shop {Shops.Count + 1}", new Point2D { x = x, y = y });
+                    Shop shop = new Shop(gameStats.ShopCharacter, $"Shop {Shops.Count + 1}", new Point2D { x = x, y = y }, Shops.Count);
 
-                    // Items in shops, you can buy them, they just don't do anything
-                    shop.AddItem(new ShopItem("Health Potion", 10));
-                    shop.AddItem(new ShopItem("Strength Potion", 20));
-                    shop.AddItem(new ShopItem("Magic Scroll", 30));
+                    // Items for each shop. They don't do anything but they are cool I guess
+                    switch (Shops.Count)
+                    {
+                        case 0:
+                            shop.AddItem(new ShopItem("Magic Scroll", 30, 0));
+                            shop.AddItem(new ShopItem("Elixir", 25, 0));
+                            shop.AddItem(new ShopItem("Mana Crystal", 10, 0));
+                            break;
+                        case 1:
+                            shop.AddItem(new ShopItem("Dagger", 15, 1));
+                            shop.AddItem(new ShopItem("Staff", 20, 1));
+                            shop.AddItem(new ShopItem("Bow", 25, 1));
+                            break;
+                        case 2:
+                            shop.AddItem(new ShopItem("Helmet", 15, 2));
+                            shop.AddItem(new ShopItem("Chestplate", 45, 2));
+                            shop.AddItem(new ShopItem("Boots", 30, 2));
+                            break;
+                    }
 
                     Shops.Add(shop);
                     break;
