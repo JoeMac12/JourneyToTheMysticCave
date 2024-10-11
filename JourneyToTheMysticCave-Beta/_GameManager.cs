@@ -112,6 +112,9 @@ namespace JourneyToTheMysticCave_Beta
             DisplaySymbolsInColumns("Open Shop", "R");
             Console.WriteLine();
             Console.WriteLine();
+            Console.WriteLine("(Side Note) Before playing, make sure console is full screen to prevent render issues");
+            Console.WriteLine();
+            Console.WriteLine();
 
             Console.WriteLine("Press any key to continue");
             Console.ReadKey(true);
