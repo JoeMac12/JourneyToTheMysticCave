@@ -19,6 +19,8 @@ namespace JourneyToTheMysticCave_Beta
         public bool itemPickedUp = false;
         private Enemy lastEncountered;
         private ShopManager shopManager;
+        public QuestManager QuestManager { get; private set; }
+        public int SwordsCollected { get; private set; }
 
         public int Gold { get; private set; }
 
@@ -40,7 +42,7 @@ namespace JourneyToTheMysticCave_Beta
             healthSystem = new HealthSystem();
         }
 
-        public void Init(Map map, GameStats gameStats, LegendColors legendColors, EnemyManager enemyManager, LevelManager levelManager, ItemManager itemManager, ShopManager shopManager)
+        public void Init(Map map, GameStats gameStats, LegendColors legendColors, EnemyManager enemyManager, LevelManager levelManager, ItemManager itemManager, ShopManager shopManager, QuestManager questManager)
         {
             this.map = map;
             this.gameStats = gameStats;
@@ -49,6 +51,7 @@ namespace JourneyToTheMysticCave_Beta
             this.levelManager = levelManager;
             this.itemManager = itemManager;
             this.shopManager = shopManager;
+            this.QuestManager = questManager;
 
             healthSystem.health = gameStats.PlayerHealth;
             character = gameStats.PlayerCharacter;
@@ -178,6 +181,7 @@ namespace JourneyToTheMysticCave_Beta
         public void AddGold(int amount)
         {
             Gold += amount;
+            QuestManager.UpdateQuest(QuestType.CollectGold, amount);
         }
 
         // Use gold
@@ -189,6 +193,13 @@ namespace JourneyToTheMysticCave_Beta
                 return true;
             }
             return false;
+        }
+
+        // Only for the sword quest
+        public void CollectSword()
+        {
+            SwordsCollected++;
+            QuestManager.UpdateQuest(QuestType.CollectSwords);
         }
 
         // Enter the shop if near it
@@ -254,6 +265,10 @@ namespace JourneyToTheMysticCave_Beta
             if (SpendGold(item.Price))
             {
                 Console.WriteLine($"\nYou bought {item.Name}!");
+                if (item.Name == "Magic Scroll")
+                {
+                    QuestManager.UpdateQuest(QuestType.BuyMagicScroll);
+                }
             }
             else
             {

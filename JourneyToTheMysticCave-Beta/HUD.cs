@@ -13,18 +13,20 @@ namespace JourneyToTheMysticCave_Beta
         ItemManager itemManager;
         LegendColors legendColors;
         Map map;
+        QuestManager questManager;
         int columnCount;
         int rowCount;
         string health;
 
 
-        public void Init(Player player, EnemyManager enemyManager, ItemManager itemManager, Map map, LegendColors legendColors)
+        public void Init(Player player, EnemyManager enemyManager, ItemManager itemManager, Map map, LegendColors legendColors, QuestManager questManager)
         {
             this.player = player;
             this.enemyManager = enemyManager;
             this.itemManager = itemManager;
             this.map = map;
             this.legendColors = legendColors;
+            this.questManager = questManager;
         }
 
         public void Update()
@@ -71,6 +73,23 @@ namespace JourneyToTheMysticCave_Beta
             }
             Console.WriteLine();
             Console.WriteLine("+-------------------------------+");
+
+            Console.WriteLine();
+            Console.WriteLine();
+
+            DisplayQuestStatus();
+        }
+
+        // Current status of quests
+        private void DisplayQuestStatus()
+        {
+            Console.WriteLine("Quests:");
+            foreach (var quest in questManager.Quests)
+            {
+                Console.ForegroundColor = quest.IsCompleted ? ConsoleColor.Green : ConsoleColor.Red;
+                Console.WriteLine($"- {quest.Description} ({quest.CurrentAmount}/{quest.RequiredAmount})");
+                Console.ResetColor();
+            }
         }
 
         private string EnemyName()

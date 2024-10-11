@@ -20,6 +20,7 @@ namespace JourneyToTheMysticCave_Beta
         EnemyManager enemyManager = new EnemyManager();
         ItemManager itemManager = new ItemManager();
         ShopManager shopManager;
+        QuestManager questManager = new QuestManager();
 
         bool gameOver = false;
         bool playerWon = false;
@@ -53,13 +54,13 @@ namespace JourneyToTheMysticCave_Beta
             levelManager.Init(player);
             map.Init(levelManager, legendColors, player, enemyManager, itemManager);
             gameStats.Init(levelManager, map);
-            shopManager = new ShopManager(map, gameStats, legendColors);
-            player.Init(map, gameStats, legendColors, enemyManager, levelManager, itemManager, shopManager);
             legendColors.Init(gameStats, map, levelManager);
+            shopManager = new ShopManager(map, gameStats, legendColors);
+            player.Init(map, gameStats, legendColors, enemyManager, levelManager, itemManager, shopManager, questManager);
             enemyManager.Init(gameStats, levelManager, legendColors, gamelog, player, map);
             itemManager.Init(gameStats, levelManager, legendColors, gamelog, player, map, enemyManager);
             gamelog.Init(player, enemyManager, itemManager, gameStats, map);
-            hUD.Init(player, enemyManager, itemManager, map, legendColors);
+            hUD.Init(player, enemyManager, itemManager, map, legendColors, questManager);
             shopManager.InitializeShops();
         }
 

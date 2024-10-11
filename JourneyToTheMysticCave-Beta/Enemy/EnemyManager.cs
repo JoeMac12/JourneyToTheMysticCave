@@ -94,6 +94,10 @@ namespace JourneyToTheMysticCave_Beta
                             firstDead = true;
                         }
                         enemy.Update(random);
+                        if (enemy.healthSystem.dead)
+                        {
+                            player.QuestManager.UpdateQuest(QuestType.KillBoss);
+                        }
                     }
                 }
             }

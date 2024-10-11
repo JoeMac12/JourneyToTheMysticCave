@@ -10,7 +10,7 @@ namespace JourneyToTheMysticCave_Beta
     {
         public int swordMultiplier;
 
-        public Sword(int count, char character, string name, int swordMultiplier, LegendColors legendColors, Player player) : 
+        public Sword(int count, char character, string name, int swordMultiplier, LegendColors legendColors, Player player) :
             base(count, character, name, legendColors, player)
         {
             this.swordMultiplier = swordMultiplier;
@@ -18,10 +18,11 @@ namespace JourneyToTheMysticCave_Beta
 
         public override void Update()
         {
-            if(player.pos.x == pos.x && player.pos.y == pos.y)
+            if (player.pos.x == pos.x && player.pos.y == pos.y)
             {
                 TryCollect();
                 player.damage += swordMultiplier;
+                player.CollectSword();
             }
         }
     }
