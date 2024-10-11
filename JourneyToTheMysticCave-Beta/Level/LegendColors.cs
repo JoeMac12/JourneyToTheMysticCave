@@ -60,6 +60,10 @@ namespace JourneyToTheMysticCave_Beta
             Console.SetCursorPosition(columnCount, rowCount++);
             DisplayChar(gameStats.MoneyCharacter, gameStats.MoneyName);
             Console.SetCursorPosition(columnCount, rowCount++);
+            DisplayChar(gameStats.GoldCharacter, gameStats.GoldName);
+            Console.SetCursorPosition(columnCount, rowCount++);
+            DisplayChar(gameStats.ShopCharacter, gameStats.ShopName);
+            Console.SetCursorPosition(columnCount, rowCount++);
             DisplayChar(gameStats.PotionCharacter, gameStats.PotionName);
             Console.SetCursorPosition(columnCount, rowCount++);
             DisplayChar(gameStats.TrapCharacter, gameStats.TrapName);
@@ -139,6 +143,12 @@ namespace JourneyToTheMysticCave_Beta
                 case 'P': // poison floor
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    break;
+                case var _ when c == gameStats.GoldCharacter: // Gold
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    break;
+                case var _ when c == gameStats.ShopCharacter: // Shop
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     break;
             }
         }

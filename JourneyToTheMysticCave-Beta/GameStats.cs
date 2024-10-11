@@ -97,6 +97,11 @@ namespace JourneyToTheMysticCave_Beta
         public int MaxGoldValue { get; set; }
         #endregion
 
+        #region ShopStat Declarations
+        public char ShopCharacter { get; set; }
+        public string ShopName { get; set; }
+        #endregion
+
         public int PoisonDamage;
 
         public void Init(LevelManager levelManager, Map map)
@@ -184,6 +189,10 @@ namespace JourneyToTheMysticCave_Beta
             GoldName = "Gold";
             MinGoldValue = 6;
             MaxGoldValue = 12;
+
+            // Shop Configs
+            ShopCharacter = '@';
+            ShopName = "Shop";
         }
 
         public int GiveHealth(Random random, string type)

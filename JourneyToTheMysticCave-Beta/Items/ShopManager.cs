@@ -10,11 +10,15 @@ namespace JourneyToTheMysticCave_Beta
     {
         private Map map;
         private Random random;
+        private GameStats gameStats;
+        private LegendColors legendColors;
         public List<Shop> Shops { get; private set; }
 
-        public ShopManager(Map map)
+        public ShopManager(Map map, GameStats gameStats, LegendColors legendColors)
         {
             this.map = map;
+            this.gameStats = gameStats;
+            this.legendColors = legendColors;
             this.random = new Random();
             Shops = new List<Shop>();
         }
@@ -40,7 +44,7 @@ namespace JourneyToTheMysticCave_Beta
 
                 if (IsValidShopPosition(x, y, currentMap))
                 {
-                    Shop shop = new Shop('S', $"Shop {Shops.Count + 1}", new Point2D { x = x, y = y }); // Shop icon 
+                    Shop shop = new Shop(gameStats.ShopCharacter, $"Shop {Shops.Count + 1}", new Point2D { x = x, y = y });
 
                     // Items in shops, you can buy them, they just don't do anything
                     shop.AddItem(new ShopItem("Health Potion", 10));
@@ -89,7 +93,9 @@ namespace JourneyToTheMysticCave_Beta
             foreach (var shop in Shops)
             {
                 Console.SetCursorPosition(shop.pos.x, shop.pos.y);
+                legendColors.MapColor(shop.character);
                 Console.Write(shop.character);
+                Console.ResetColor();
             }
         }
     }
